@@ -41,15 +41,17 @@ def to_input( pathfile, to='(-3,0,0)', width=8, height=8, name="temp" ):
 """
 
 # Conv
-def to_Conv( name, s_filer=256, n_filer=(64,64), offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
+def to_Conv( name, s_filer=256, n_filer=64, y=" ", offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" " ):
     return r"""
 \pic[shift={"""+ offset +"""}] at """+ to +""" 
-    {Box={
+    {RightBandedBox={
         name=""" + name +""",
-        caption="""+ caption +r""",
-        xlabel={{ """+ str(n_filer[0]) +""", """+ str(n_filer[1]) +""" }},
+        caption="""+ caption +""",
+        xlabel={{"""+ str(n_filer) +"""}},
+        ylabel="""+ str(y) + """,
         zlabel="""+ str(s_filer) +""",
         fill=\ConvColor,
+        bandfill=\ConvReluColor,
         height="""+ str(height) +""",
         width="""+ str(width) +""",
         depth="""+ str(depth) +"""
@@ -59,13 +61,14 @@ def to_Conv( name, s_filer=256, n_filer=(64,64), offset="(0,0,0)", to="(0,0,0)",
 
 # Conv,Conv,relu
 # Bottleneck
-def to_ConvConvRelu( name, s_filer=256, n_filer=(64,64), offset="(0,0,0)", to="(0,0,0)", width=(2,2), height=40, depth=40, caption=" " ):
+def to_ConvConvRelu( name, s_filer=256, n_filer=(64,64), y=" ", offset="(0,0,0)", to="(0,0,0)", width=(2,2), height=40, depth=40, caption=" " ):
     return r"""
 \pic[shift={ """+ offset +""" }] at """+ to +""" 
     {RightBandedBox={
         name="""+ name +""",
         caption="""+ caption +""",
         xlabel={{ """+ str(n_filer[0]) +""", """+ str(n_filer[1]) +""" }},
+        ylabel="""+ str(y) + """,
         zlabel="""+ str(s_filer) +""",
         fill=\ConvColor,
         bandfill=\ConvReluColor,
